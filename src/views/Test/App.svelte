@@ -1,5 +1,5 @@
 <script>
-  import Test from '@/views/Test'
+  import Head from '@/views/Test/components/Head'
 
   let visible = false
 
@@ -10,7 +10,7 @@
 
 <div class="box">
   {#if visible}
-    <Test />
+    <Head />
   {/if}
   <h1>Cybernetically enhanced web apps</h1>
   <p class="tip">

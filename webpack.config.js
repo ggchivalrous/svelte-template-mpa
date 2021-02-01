@@ -117,6 +117,7 @@ function getHTMLPlugin() {
           inject: true,
           filename: item.filename,
           template: item.template,
+          chunks: [item.name],
         },
         isProd
           ? {
@@ -164,6 +165,8 @@ const entry = {}
 pageInfo.forEach(item => {
   entry[item.name] = item.entry
 })
+
+console.log(entry, getHTMLPlugin())
 
 module.exports = {
   entry,
