@@ -117,7 +117,7 @@ function getHTMLPlugin() {
           inject: true,
           filename: item.filename,
           template: item.template,
-          chunks: [item.name],
+          chunks: item.chunks,
         },
         isProd
           ? {
@@ -149,11 +149,15 @@ function getPagesInfo() {
   return pageList.map(item => {
     const filePath = path.resolve(root, item)
     if (fs.statSync(filePath).isDirectory()) {
+      let name = item
+      name = name.replace(name.substring(0, 1), name.substring(0, 1).toLocaleLowerCase())
+
       return {
         name: item,
         entry: path.resolve(filePath, 'main.js'),
         template: 'public/index.html',
-        filename: item + '/index.html',
+        filename: name + '/index.html',
+        chunks: [item],
       }
     }
   })
@@ -165,8 +169,6 @@ const entry = {}
 pageInfo.forEach(item => {
   entry[item.name] = item.entry
 })
-
-console.log(entry, getHTMLPlugin())
 
 module.exports = {
   entry,
